@@ -2,7 +2,7 @@ import React from "react";
 
 function TodoItem({ id, task, completed, onToggleCompleted }) {
   const handleChange = () => {
-    // onToggleCompleted(id);
+    onToggleCompleted(id);
   };
 
   return (
