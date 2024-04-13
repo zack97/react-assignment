@@ -1,22 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
-function TodoItem({ label }) {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleOnChange = () => {
-    setIsChecked(!isChecked);
+function TodoItem({ id, task, completed, onToggleCompleted }) {
+  const handleChange = () => {
+    // onToggleCompleted(id);
   };
 
   return (
     <div>
-      <input
-        type="checkbox"
-        name="todo"
-        value={label}
-        checked={isChecked}
-        onChange={handleOnChange}
-      />
-      {label}
+      <input type="checkbox" checked={completed} onChange={handleChange} />
+      <label>{task}</label>
     </div>
   );
 }
