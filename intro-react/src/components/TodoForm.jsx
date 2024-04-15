@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function TodoForm({ onAddTodo }) {
-  const [todoText, setTodoText] = useState("");
+  const [todoText, setTodoText] = useState(" ");
 
   const handleInputChange = (event) => {
     setTodoText(event.target.value);

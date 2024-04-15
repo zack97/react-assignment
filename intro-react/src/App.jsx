@@ -6,8 +6,13 @@ import { v4 as uuidv4 } from "uuid";
 const LSKEY = 1997;
 
 function App() {
-  const contentTodo = [];
+  const contentTodo = [
+    { id: uuidv4(), task: "Learn react", completed: false },
+    { id: uuidv4(), task: "Be awesome", completed: true },
+  ];
+
   const [todos, setTodos] = useState(contentTodo);
+
   useEffect(() => {
     const storedTodos = JSON.parse(
       window.localStorage.getItem(LSKEY + ".todos")
@@ -19,6 +24,7 @@ function App() {
 
   const addTodo = (newTodo) => {
     setTodos([...todos, { id: uuidv4(), task: newTodo, completed: false }]);
+    contentTodo.push({ id: uuidv4(), task: newTodo, completed: false });
   };
 
   useEffect(() => {
