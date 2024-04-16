@@ -6,12 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 const LSKEY = 1997;
 
 function App() {
-  const contentTodo = [
-    { id: uuidv4(), task: "Learn react", completed: false },
-    { id: uuidv4(), task: "Be awesome", completed: true },
-  ];
-
-  const [todos, setTodos] = useState(contentTodo);
+  const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     const storedTodos = JSON.parse(
@@ -23,13 +18,27 @@ function App() {
   }, []);
 
   const addTodo = (newTodo) => {
-    setTodos([...todos, { id: uuidv4(), task: newTodo, completed: false }]);
-    contentTodo.push({ id: uuidv4(), task: newTodo, completed: false });
+    const updatedTodos = [
+      ...todos,
+      { id: uuidv4(), task: newTodo, completed: false },
+    ];
+    setTodos(updatedTodos);
+    window.localStorage.setItem(LSKEY + ".todos", JSON.stringify(updatedTodos));
   };
 
-  useEffect(() => {
-    window.localStorage.setItem(LSKEY + ".todos", JSON.stringify(todos));
-  }, [todos]);
+  const toggleComplete = (id) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(updatedTodos);
+    window.localStorage.setItem(LSKEY + ".todos", JSON.stringify(updatedTodos));
+  };
+
+  const deleteTodo = (id) => {
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
+    window.localStorage.setItem(LSKEY + ".todos", JSON.stringify(updatedTodos));
+  };
 
   return (
     <section>
@@ -37,7 +46,11 @@ function App() {
       <div className="main-div">
         <TodoForm onAddTodo={addTodo} />
         <div className="hr"></div>
-        <TodoList todos={todos} />
+        <TodoList
+          todos={todos}
+          handleToggleComplete={toggleComplete}
+          handleDelete={deleteTodo}
+        />
       </div>
     </section>
   );
