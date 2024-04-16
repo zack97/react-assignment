@@ -74,5 +74,11 @@ section {
   color: aliceblue;
   cursor: pointer;
   border: none;
-  margin-left: 150px;
+  margin-right: 20px;
+}
+
+.todo-item {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }

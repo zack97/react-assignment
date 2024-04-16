@@ -11,8 +11,10 @@ function TodoItem({ id, task, completed, handleToggleComplete, handleDelete }) {
 
   return (
     <div className={completed ? "todo-item completed" : "todo-item"}>
-      <input type="checkbox" checked={completed} onChange={handleChange} />
-      <label>{task}</label>
+      <div>
+        <input type="checkbox" checked={completed} onChange={handleChange} />
+        <label>{task}</label>
+      </div>
       <button className="delete" onClick={handleDeleteClick}>
         Delete
       </button>
